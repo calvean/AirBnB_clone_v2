@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Console Module """
+"""Defines the HBNB console."""
 import cmd
 from shlex import split
 from models import storage
@@ -14,9 +14,8 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
-    """ Contains the functionality for the HBNB console"""
-    
-    # determines prompt for interactive/non-interactive modes
+    """Defines the HolbertonBnB command interpreter."""
+
     prompt = "(hbnb) "
     __classes = {
         "BaseModel",
