@@ -13,16 +13,24 @@ chown -R ubuntu /data/
 chgrp -R ubuntu /data/
 
 printf %s "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
-    root   /var/www/html;
-    index  index.html index.htm;
+#   listen 80 default_server;
+#    listen [::]:80 default_server;
+#    add_header X-Served-By $HOSTNAME;
+#    root   /var/www/html;
+#    index  index.html index.htm;
 
-    location /hbnb_static {
-        alias /data/web_static/current;
-        index index.html index.htm;
+    listen 80;
+    server_name codeslap www.codeslap.tech;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/ubuntu/flask/flask.sock;
     }
+
+#    location /hbnb_static {
+#        alias /data/web_static/current;
+#        index index.html index.htm;
+#    }
 
     location /redirect_me {
         return 301 https://www.youtube.com/watch?v=QH2-TGUlw\u4?;
